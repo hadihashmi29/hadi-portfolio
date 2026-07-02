@@ -622,7 +622,7 @@ export default function App() {
                   </div>
                   <div className="min-w-0">
                     <div className="font-mono text-[10px] text-slate-500 uppercase tracking-wide">GitHub</div>
-                    <div className="text-sm text-slate-200 truncate">github.com/hadihashmi29</div>
+                    <div className="text-sm text-slate-200 truncate">github.com</div>
                   </div>
                   <ExternalLink size={15} className="ml-auto text-slate-500 group-hover:text-cyan-400 transition-colors flex-shrink-0" />
                 </a>
@@ -636,7 +636,7 @@ export default function App() {
                   </div>
                   <div className="min-w-0">
                     <div className="font-mono text-[10px] text-slate-500 uppercase tracking-wide">LinkedIn</div>
-                    <div className="text-sm text-slate-200 truncate">linkedin.com/in/hadihashmi</div>
+                    <div className="text-sm text-slate-200 truncate">linkedin.com</div>
                   </div>
                   <ExternalLink size={15} className="ml-auto text-slate-500 group-hover:text-cyan-400 transition-colors flex-shrink-0" />
                 </a>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  Menu, X, Download, Mail, Phone, MapPin, Github, Linkedin, ChevronUp,
+  Menu, X, Download, Mail, MapPin, Github, Linkedin, ChevronUp,
   MessageCircle, Send, ExternalLink, Sparkles, ShieldCheck, Award,
   GraduationCap, Briefcase, Cpu, Terminal, ArrowRight, Sun, Moon,
   BrainCircuit, Layers, MessageSquareText, Code2, Braces, FileCode,
@@ -131,6 +131,17 @@ function Reveal({ children, className = "" }) {
 /* ---------------- Main App ---------------- */
 export default function App() {
   const [dark, setDark] = useState(true);
+
+  useEffect(() => {
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.type = "image/jpeg";
+    link.href = PROFILE_IMG;
+  }, []);
   const [certOpen, setCertOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollPct, setScrollPct] = useState(0);
@@ -566,36 +577,77 @@ export default function App() {
       <section id="contact" className="relative z-10 py-24 bg-slate-900/40">
         <div className="max-w-6xl mx-auto px-6">
           <Reveal><SectionHead eyebrow="06 / CONTACT" title="Let's talk" /></Reveal>
-          <Reveal>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {[
-                { Icon: Mail, label: "Email", value: "hadimustafa293@gmail.com", href: "mailto:hadimustafa293@gmail.com", iconColor: undefined, color: "group-hover:text-red-400 group-hover:border-red-400" },
-                { Icon: Phone, label: "Phone", value: "+92 312 5023031", href: "tel:+923125023031", iconColor: undefined, color: "group-hover:text-cyan-400 group-hover:border-cyan-400" },
-                { Icon: MapPin, label: "Location", value: "Islamabad, Pakistan", href: null, iconColor: undefined, color: "group-hover:text-purple-400 group-hover:border-purple-400" },
-                { Icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/hadihashmi", href: "https://linkedin.com/in/hadihashmi", iconColor: "#0A66C2", color: "group-hover:border-blue-400" },
-                { Icon: Github, label: "GitHub", value: "github.com/hadihashmi29", href: "https://github.com/hadihashmi29", iconColor: dark ? "#E2E8F0" : "#0f172a", color: dark ? "group-hover:border-slate-200" : "group-hover:border-slate-900" },
-              ].map(({ Icon, label, value, href, color, iconColor }) => {
-                const Wrapper = href ? "a" : "div";
-                return (
-                  <Wrapper
-                    key={label}
-                    {...(href ? { href, target: href.startsWith("http") ? "_blank" : undefined, rel: "noopener noreferrer" } : {})}
-                    className="group bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center hover:-translate-y-1 transition-all cursor-pointer"
+
+          <div className="grid md:grid-cols-5 gap-6">
+            {/* Left: primary CTA panel */}
+            <Reveal className="md:col-span-3">
+              <div className="h-full bg-slate-900 border border-slate-800 rounded-2xl p-8 md:p-10 relative overflow-hidden">
+                <div
+                  className="absolute -top-24 -right-24 w-64 h-64 rounded-full opacity-20 blur-3xl"
+                  style={{ background: "radial-gradient(circle, #4f7cff, transparent 70%)" }}
+                />
+                <div className="relative">
+                  <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs tracking-widest mb-4">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" /> OPEN TO WORK
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-slate-100 leading-snug mb-4">
+                    Have a project in mind?<br />Let's build it together.
+                  </h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-md">
+                    Whether it's an AI/ML idea or a full stack build, I'm always happy to hear about it — drop me an email and I'll get back to you.
+                  </p>
+                  <a
+                    href="mailto:hadimustafa293@gmail.com"
+                    className="inline-flex items-center gap-2 font-mono text-sm px-6 py-3.5 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:-translate-y-0.5 transition-transform mb-8"
                   >
-                    <div className={`w-12 h-12 mx-auto mb-4 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 transition-colors ${color}`}>
-                      <Icon size={20} color={iconColor} />
-                    </div>
-                    <div className="font-mono text-[10px] text-slate-500 uppercase tracking-wide">{label}</div>
-                    <div className="text-xs text-slate-300 mt-1.5 break-words">{value}</div>
-                  </Wrapper>
-                );
-              })}
-            </div>
-          </Reveal>
+                    <Mail size={16} /> hadimustafa293@gmail.com
+                  </a>
+                  <div className="flex items-center gap-2 text-slate-400 text-sm">
+                    <MapPin size={15} className="text-purple-400" /> Islamabad, Pakistan
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Right: social tiles */}
+            <Reveal className="md:col-span-2">
+              <div className="grid grid-rows-2 gap-6 h-full">
+                <a
+                  href="https://github.com/hadihashmi29"
+                  target="_blank" rel="noopener noreferrer"
+                  className="group bg-slate-900 border border-slate-800 rounded-2xl p-6 flex items-center gap-4 hover:-translate-y-1 hover:border-slate-500 transition-all"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center flex-shrink-0">
+                    <Github size={22} color={dark ? "#E2E8F0" : "#0f172a"} />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-mono text-[10px] text-slate-500 uppercase tracking-wide">GitHub</div>
+                    <div className="text-sm text-slate-200 truncate">github.com/hadihashmi29</div>
+                  </div>
+                  <ExternalLink size={15} className="ml-auto text-slate-500 group-hover:text-cyan-400 transition-colors flex-shrink-0" />
+                </a>
+                <a
+                  href="https://linkedin.com/in/hadihashmi"
+                  target="_blank" rel="noopener noreferrer"
+                  className="group bg-slate-900 border border-slate-800 rounded-2xl p-6 flex items-center gap-4 hover:-translate-y-1 hover:border-blue-400 transition-all"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center flex-shrink-0">
+                    <Linkedin size={22} color="#0A66C2" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-mono text-[10px] text-slate-500 uppercase tracking-wide">LinkedIn</div>
+                    <div className="text-sm text-slate-200 truncate">linkedin.com/in/hadihashmi</div>
+                  </div>
+                  <ExternalLink size={15} className="ml-auto text-slate-500 group-hover:text-cyan-400 transition-colors flex-shrink-0" />
+                </a>
+              </div>
+            </Reveal>
+          </div>
+
           <Reveal className="flex justify-center mt-10">
             <button
               onClick={downloadResume}
-              className="inline-flex items-center gap-2 font-mono text-sm px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:-translate-y-0.5 transition-transform"
+              className="inline-flex items-center gap-2 font-mono text-sm px-6 py-3 rounded-lg border border-slate-700 text-slate-200 hover:border-cyan-400 hover:text-cyan-400 transition-colors"
             >
               <Download size={15} /> Download Resume
             </button>
